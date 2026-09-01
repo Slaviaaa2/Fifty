@@ -1,0 +1,8 @@
+name: Fifty
+version: '${version}'
+
+main: com.fifty.dev.Fifty
+bootstrapper: com.fifty.dev.FiftyBootstrap
+loader: com.fifty.dev.FiftyLoader
+api-version: '26.2'
+load: POSTWORLD
