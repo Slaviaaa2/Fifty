@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": "minecraft:nether_star",
+    "title": {
+      "text": "Fifty"
+    },
+    "description": {
+      "text": "Fifty通貨を初めて手に入れる"
+    },
+    "background": "block/iron_block"
+  },
+  "criteria": {
+    "never": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "never"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fifty:craftable_core"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "fifty:root",
+  "criteria": {
+    "has_ingredients": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          },
+          {
+            "items": "minecraft:stick"
+          },
+          {
+            "items": "minecraft:gold_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingredients"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fifty:craftable_core"
+    ]
+  },
+  "sends_telemetry_event": false
+}

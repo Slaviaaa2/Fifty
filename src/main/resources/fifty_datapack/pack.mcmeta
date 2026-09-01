@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "Advancements bundled with the Fifty plugin",
+    "min_format": [107, 1],
+    "max_format": [107, 1]
+  }
+}

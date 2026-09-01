@@ -1,0 +1,19 @@
+{
+  "parent": "fifty:root",
+  "criteria": {
+    "unlock": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fifty:replace_with_recipe_id"
+    ]
+  },
+  "sends_telemetry_event": false
+}
