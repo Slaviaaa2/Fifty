@@ -1,0 +1,28 @@
+{
+  "parent": "fifty:root",
+  "display": {
+    "icon": "minecraft:iron_ingot",
+    "title": {
+      "text": "全ての基礎"
+    },
+    "description": {
+      "text": "クラフタブルコアを初めて手に入れる"
+    }
+  },
+  "criteria": {
+    "never": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "never"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fifty:iron_paxel"
+    ]
+  },
+  "sends_telemetry_event": false
+}

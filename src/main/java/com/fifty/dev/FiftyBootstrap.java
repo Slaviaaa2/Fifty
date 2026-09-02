@@ -1,5 +1,6 @@
 package com.fifty.dev;
 
+import com.fifty.dev.commands.FiftyCommands;
 import io.papermc.paper.datapack.Datapack;
 import io.papermc.paper.plugin.bootstrap.BootstrapContext;
 import io.papermc.paper.plugin.bootstrap.PluginBootstrap;
@@ -16,7 +17,13 @@ public final class FiftyBootstrap implements PluginBootstrap {
 
     @Override
     public void bootstrap(final BootstrapContext context) {
-        context.getLifecycleManager().registerEventHandler(
+        var lifecycleManager = context.getLifecycleManager();
+        lifecycleManager.registerEventHandler(
+                LifecycleEvents.COMMANDS, commands -> {
+                    commands.registrar().register(FiftyCommands.create());
+                }
+        );
+        lifecycleManager.registerEventHandler(
                 LifecycleEvents.DATAPACK_DISCOVERY.newHandler(event -> {
                     URL resource = FiftyBootstrap.class.getResource(
                             DATAPACK_RESOURCE

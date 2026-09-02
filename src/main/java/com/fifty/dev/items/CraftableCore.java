@@ -1,6 +1,8 @@
 package com.fifty.dev.items;
 
 import com.fifty.dev.api.CustomItem;
+import com.fifty.dev.api.CustomItemAdvancement;
+import com.fifty.dev.api.enums.CustomItemTrigger;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemRarity;
@@ -25,5 +27,13 @@ public class CraftableCore extends CustomItem {
            meta.setRarity(ItemRarity.UNCOMMON);
         });
         return stack;
+    }
+
+    @Override
+    public List<CustomItemAdvancement> getAdvancements() {
+        return List.of(CustomItemAdvancement.of(
+                "fifty:craftable_core",
+                CustomItemTrigger.ACQUIRE
+        ));
     }
 }

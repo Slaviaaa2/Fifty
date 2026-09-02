@@ -1,0 +1,74 @@
+# Advancement tree offsets applied after Minecraft's automatic tree layout.
+#
+# Each entry must point to a ROOT advancement.
+# The configured x/y values are added to every displayed advancement
+# belonging to that root's tree.
+#
+# x: moves the entire tree horizontally
+# y: moves the entire tree vertically
+#
+# Minecraft's original tree shape and spacing are preserved.
+
+advancement-tree-offsets: {}
+
+# Example (replace the empty map above):
+#
+# Moves the entire fifty:root advancement tree
+# 2 positions to the right and 1 position upward.
+#
+# advancement-tree-offsets:
+#   "fifty:root":
+#     x: 2.0
+#     y: -1.0
+
+# Vanilla trees can also be moved:
+#
+#   "minecraft:story/root":
+#     x: -1.0
+#     y: 0.5
+
+# Optional tree-local absolute coordinates for individual advancements.
+# These are advancement-tree coordinates, not screen coordinates. In
+# particular, root x: 0.0 / y: 0.0 is Minecraft's normal baseline and does
+# not request that the advancement screen move.
+#
+# Leave this empty to use Minecraft's vanilla layout and client-side
+# centering. A forced position takes priority over a tree offset.
+advancement-positions: {}
+
+# Example (replace the empty map above):
+# advancement-positions:
+#   "fifty:craftable_core":
+#     x: 2.0
+#     y: 1.0
+
+# /fft item sell でメインハンドのスタックを売却するときの1個あたりの価格。
+# アイテム自身に設定されたレアリティを優先し、未設定なら素材本来の
+# レアリティを使用します。0以下にすると、そのレアリティは売却できません。
+item-selling:
+  prices:
+    COMMON: 1.0
+    UNCOMMON: 5.0
+    RARE: 25.0
+    EPIC: 100.0
+
+# CustomItem の代わりに CustomBlock を継承したアイテムのブロック動作。
+# 設置時の ItemStack はチャンクへ永続保存され、回収時に復元されます。
+custom-blocks:
+  enabled: true
+  defaults:
+    drop-in-creative: false
+    require-correct-tool: false
+    drop-from-explosions: true
+    drop-from-natural-destruction: true
+    move-with-pistons: false
+    protect-from-entities: true
+    experience: 0
+
+  # アイテムID（小文字）単位で defaults の一部または全部を上書きできます。
+  overrides: {}
+  # overrides:
+  #   example_block:
+  #     require-correct-tool: true
+  #     move-with-pistons: true
+  #     experience: 3

@@ -1,0 +1,28 @@
+{
+  "parent": "fifty:craftable_core",
+  "display": {
+    "icon": "minecraft:iron_axe",
+    "title": {
+      "text": "掘れないものなどあんまりない"
+    },
+    "description": {
+      "text": "鉄のパクセルを初めて手に入れる"
+    }
+  },
+  "criteria": {
+    "never": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "never"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fifty:iron_paxel"
+    ]
+  },
+  "sends_telemetry_event": false
+}

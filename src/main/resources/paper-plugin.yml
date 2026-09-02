@@ -6,3 +6,18 @@ bootstrapper: com.fifty.dev.FiftyBootstrap
 loader: com.fifty.dev.FiftyLoader
 api-version: '26.2'
 load: POSTWORLD
+
+dependencies:
+  server:
+    Vault:
+      load: BEFORE
+      required: false
+      join-classpath: true
+
+permissions:
+  fifty.command.item.give:
+    description: カスタムアイテムを付与するコマンドの使用を許可します
+    default: op
+  fifty.command.item.sell:
+    description: メインハンドのアイテムを売却するコマンドの使用を許可します
+    default: true

@@ -1,16 +1,95 @@
 package com.fifty.dev.api;
 
 import com.fifty.dev.api.enums.NamespacedKeyFactoryType;
+import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemBreakEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 public abstract class CustomItem {
     public abstract String getItemId();
     public abstract ItemStack getItemStack();
+
+    /**
+     * Advancement rules owned by this item definition.
+     * Each matching trigger awards the configured criteria, or every
+     * remaining criterion when none are specified.
+     */
+    public Collection<CustomItemAdvancement> getAdvancements() {
+        return List.of();
+    }
+
+    /**
+     * Allows an item to add event-specific conditions to a declared rule.
+     * Returning false leaves the advancement unchanged for this event.
+     */
+    public boolean shouldTriggerAdvancement(
+            Player player,
+            CustomItemAdvancement advancement,
+            Event sourceEvent
+    ) {
+        return true;
+    }
+
+    /** Called whenever a player inventory slot changes to this custom item. */
+    public void onInventorySlotChange(PlayerInventorySlotChangeEvent event) {
+    }
+
+    /** Called when this custom item is produced by a crafting recipe. */
+    public void onCraft(CraftItemEvent event) {
+    }
+
+    /** Called before a player picks this custom item up. */
+    public void onPickup(EntityPickupItemEvent event) {
+    }
+
+    /** Called when this custom item is used in a player interaction. */
+    public void onInteract(PlayerInteractEvent event) {
+    }
+
+    /** Called before this custom item is consumed. */
+    public void onConsume(PlayerItemConsumeEvent event) {
+    }
+
+    /** Called before this custom item is dropped. */
+    public void onDrop(PlayerDropItemEvent event) {
+    }
+
+    /** Called before durability damage is applied to this custom item. */
+    public void onDamage(PlayerItemDamageEvent event) {
+    }
+
+    /** Called after this custom item breaks because its durability ran out. */
+    public void onBreak(PlayerItemBreakEvent event) {
+    }
+
+    /** Called before the player selects an inventory slot containing this item. */
+    public void onSelect(PlayerItemHeldEvent event) {
+    }
+
+    /** Called when this item participates in a main/off-hand swap. */
+    public void onSwapHands(PlayerSwapHandItemsEvent event) {
+    }
+
+    /** Called before this item places a block. */
+    public void onPlace(BlockPlaceEvent event) {
+    }
 
     public final ItemStack createItemStack(){
         var stack = getItemStack().clone();
