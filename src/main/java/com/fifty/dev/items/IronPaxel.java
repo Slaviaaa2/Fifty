@@ -5,7 +5,11 @@ import com.fifty.dev.api.CustomItemAdvancement;
 import com.fifty.dev.api.enums.CustomItemTrigger;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,13 +32,26 @@ public final class IronPaxel extends CustomItem {
             ));
             meta.setRarity(ItemRarity.UNCOMMON);
 
+            meta.addAttributeModifier(Attribute.ATTACK_DAMAGE, new AttributeModifier(
+                    new NamespacedKey("fifty","iron_paxel_attribute_0"),
+                    3,
+                    AttributeModifier.Operation.ADD_NUMBER,
+                    EquipmentSlotGroup.MAINHAND
+            ));
+            meta.addAttributeModifier(Attribute.ATTACK_SPEED, new AttributeModifier(
+                    new NamespacedKey("fifty","iron_paxel_attribute_1"),
+                    -0.25,
+                    AttributeModifier.Operation.ADD_NUMBER,
+                    EquipmentSlotGroup.MAINHAND
+            ));
+
             var tool = meta.getTool();
             var speed = 6.0f;
             tool.setRules(List.of());
             tool.addRule(Tag.INCORRECT_FOR_IRON_TOOL, null, false);
             tool.addRule(Tag.MINEABLE_PICKAXE, speed, true);
-            tool.addRule(Tag.MINEABLE_PICKAXE, speed, true);
-            tool.addRule(Tag.MINEABLE_PICKAXE, speed, true);
+            tool.addRule(Tag.MINEABLE_AXE, speed, true);
+            tool.addRule(Tag.MINEABLE_SHOVEL, speed, true);
 
             tool.setDefaultMiningSpeed(1f);
             tool.setDamagePerBlock(1);
