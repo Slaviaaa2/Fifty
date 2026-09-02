@@ -1,0 +1,19 @@
+{
+  "parent": "fifty:craftable_core",
+  "criteria": {
+    "unlock": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fifty:craftable_core"
+    ]
+  },
+  "sends_telemetry_event": false
+}
