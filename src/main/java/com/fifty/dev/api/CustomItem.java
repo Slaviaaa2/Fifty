@@ -16,11 +16,16 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public abstract class CustomItem {
     public abstract String getItemId();
@@ -113,6 +118,70 @@ public abstract class CustomItem {
         ItemStack stack = createItemStack();
         stack.setAmount(amount);
         return stack;
+    }
+
+    /**
+     * Recreates an existing stack from this definition while retaining state
+     * acquired through normal play.
+     */
+    public final ItemStack updateItemStack(ItemStack existing) {
+        Objects.requireNonNull(existing, "existing");
+
+        if (!matches(existing)) {
+            throw new IllegalArgumentException(
+                    "ItemStack does not belong to CustomItem '" + getItemId() + "'"
+            );
+        }
+
+        ItemStack updated = createItemStack(existing.getAmount());
+        ItemMeta previousMeta = existing.getItemMeta();
+        ItemMeta updatedMeta = updated.getItemMeta();
+
+        updatedMeta.removeEnchantments();
+        previousMeta.getEnchants().forEach(
+                (enchantment, level) -> updatedMeta.addEnchant(
+                        enchantment, level, true
+                )
+        );
+
+        if (previousMeta instanceof EnchantmentStorageMeta previousStorage
+                && updatedMeta instanceof EnchantmentStorageMeta updatedStorage) {
+            for (var enchantment : updatedStorage.getStoredEnchants().keySet()) {
+                updatedStorage.removeStoredEnchant(enchantment);
+            }
+            previousStorage.getStoredEnchants().forEach(
+                    (enchantment, level) -> updatedStorage.addStoredEnchant(
+                            enchantment, level, true
+                    )
+            );
+        }
+
+        if (previousMeta instanceof Damageable previousDamage
+                && updatedMeta instanceof Damageable updatedDamage) {
+            if (previousDamage.hasDamage()) {
+                updatedDamage.setDamage(previousDamage.getDamage());
+            } else {
+                updatedDamage.resetDamage();
+            }
+        }
+
+        if (previousMeta instanceof Repairable previousRepair
+                && updatedMeta instanceof Repairable updatedRepair
+                && previousRepair.hasRepairCost()) {
+            updatedRepair.setRepairCost(previousRepair.getRepairCost());
+        }
+
+        if (previousMeta.hasCustomName()) {
+            updatedMeta.customName(previousMeta.customName());
+        }
+
+        previousMeta.getPersistentDataContainer().copyTo(
+                updatedMeta.getPersistentDataContainer(),
+                false
+        );
+
+        updated.setItemMeta(updatedMeta);
+        return updated;
     }
 
     public final boolean matches(ItemStack stack) {

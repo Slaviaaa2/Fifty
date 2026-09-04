@@ -1,0 +1,61 @@
+{
+  "parent": "fifty:millionaire",
+  "display": {
+    "icon": "minecraft:gold_ingot",
+    "title": {
+      "text": "ビリオネア！"
+    },
+    "description": {
+      "text": "ビリオネアを成し遂げる"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "progress_1": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_2": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_3": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_4": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_5": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_6": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_7": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_8": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_9": {
+      "trigger": "minecraft:impossible"
+    },
+    "progress_10": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    ["progress_1"],
+    ["progress_2"],
+    ["progress_3"],
+    ["progress_4"],
+    ["progress_5"],
+    ["progress_6"],
+    ["progress_7"],
+    ["progress_8"],
+    ["progress_9"],
+    ["progress_10"]
+  ],
+  "rewards": {
+    "recipes": []
+  },
+  "sends_telemetry_event": false
+}

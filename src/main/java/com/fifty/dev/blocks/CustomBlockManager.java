@@ -60,6 +60,19 @@ public final class CustomBlockManager implements Listener {
 
     public void initialize() {
         this.enabled = this.plugin.getConfig().getBoolean("custom-blocks.enabled", true);
+        int registered = this.reloadDefinitions();
+
+        if (this.enabled) {
+            this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+        }
+        this.plugin.getLogger().info(
+                "Custom block support " + (this.enabled ? "enabled" : "disabled")
+                        + " with " + registered + " registered block(s)."
+        );
+    }
+
+    /** Refreshes definition-derived state without registering event handlers again. */
+    public int reloadDefinitions() {
         this.settings.clear();
 
         int registered = 0;
@@ -80,14 +93,10 @@ public final class CustomBlockManager implements Listener {
             );
             registered++;
         }
-
-        if (this.enabled) {
-            this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
-        }
         this.plugin.getLogger().info(
-                "Custom block support " + (this.enabled ? "enabled" : "disabled")
-                        + " with " + registered + " registered block(s)."
+                "Reloaded " + registered + " custom block definition(s)."
         );
+        return registered;
     }
 
     /** Returns the custom block registered at a placed block location. */

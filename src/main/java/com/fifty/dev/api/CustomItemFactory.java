@@ -276,6 +276,17 @@ public final class CustomItemFactory {
         return item == null ? null : item.createItemStack(amount);
     }
 
+    /**
+     * Updates a registered custom-item stack to its current definition.
+     *
+     * @return the updated stack, or {@code null} when the stack is not a
+     * registered custom item
+     */
+    public static ItemStack Update(ItemStack stack) {
+        CustomItem item = Provide(stack);
+        return item == null ? null : item.updateItemStack(stack);
+    }
+
     public static boolean Exists(String id) {
         return id != null &&
                 ITEMS.containsKey(NormalizeId(id));

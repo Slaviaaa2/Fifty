@@ -21,3 +21,6 @@ permissions:
   fifty.command.item.sell:
     description: メインハンドのアイテムを売却するコマンドの使用を許可します
     default: true
+  fifty.command.item.update:
+    description: メインハンドのカスタムアイテムを現在の定義に更新します
+    default: true

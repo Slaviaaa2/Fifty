@@ -21,6 +21,8 @@ public final class FiftyCommands {
             "fifty.command.item.give";
     private static final String SELL_ITEM_PERMISSION =
             "fifty.command.item.sell";
+    private static final String UPDATE_ITEM_PERMISSION =
+            "fifty.command.item.update";
 
     private FiftyCommands(){}
 
@@ -44,8 +46,47 @@ public final class FiftyCommands {
                                 .requires(source -> source.getSender()
                                         .hasPermission(SELL_ITEM_PERMISSION))
                                 .executes(ctx -> sellMainHand(ctx.getSource())))
+                        .then(Commands.literal("update")
+                                .requires(source -> source.getSender()
+                                        .hasPermission(UPDATE_ITEM_PERMISSION))
+                                .executes(ctx -> updateMainHand(ctx.getSource())))
 
                 ).build();
+    }
+
+    private static int updateMainHand(CommandSourceStack source) {
+        if (!(source.getExecutor() instanceof Player player)) {
+            source.getSender().sendMessage(Component.text(
+                    "このコマンドはプレイヤーのみ実行できます。",
+                    NamedTextColor.RED
+            ));
+            return 0;
+        }
+
+        ItemStack stack = player.getInventory().getItemInMainHand();
+        if (stack.isEmpty()) {
+            player.sendMessage(Component.text(
+                    "更新するアイテムをメインハンドに持ってください。",
+                    NamedTextColor.RED
+            ));
+            return 0;
+        }
+
+        ItemStack updated = CustomItemFactory.Update(stack);
+        if (updated == null) {
+            player.sendMessage(Component.text(
+                    "このアイテムはFiftyのカスタムアイテムではありません。",
+                    NamedTextColor.RED
+            ));
+            return 0;
+        }
+
+        player.getInventory().setItemInMainHand(updated);
+        player.sendMessage(Component.text(
+                "アイテムを現在の定義に更新しました。",
+                NamedTextColor.GREEN
+        ));
+        return 1;
     }
 
     private static int sellMainHand(CommandSourceStack source) {
