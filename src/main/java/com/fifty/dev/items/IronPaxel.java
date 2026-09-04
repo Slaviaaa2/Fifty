@@ -33,14 +33,15 @@ public final class IronPaxel extends CustomItem {
             meta.setRarity(ItemRarity.UNCOMMON);
 
             meta.addAttributeModifier(Attribute.ATTACK_DAMAGE, new AttributeModifier(
-                    new NamespacedKey("fifty","iron_paxel_attribute_0"),
-                    3,
+                    NamespacedKey.minecraft("base_attack_damage"),
+                    11,
                     AttributeModifier.Operation.ADD_NUMBER,
                     EquipmentSlotGroup.MAINHAND
             ));
+
             meta.addAttributeModifier(Attribute.ATTACK_SPEED, new AttributeModifier(
-                    new NamespacedKey("fifty","iron_paxel_attribute_1"),
-                    -0.25,
+                    NamespacedKey.minecraft("base_attack_speed"),
+                    -3.1,
                     AttributeModifier.Operation.ADD_NUMBER,
                     EquipmentSlotGroup.MAINHAND
             ));
